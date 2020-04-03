@@ -1,6 +1,8 @@
 (ns dg.client.app
   (:require [reagent.core :as reagent :refer [atom]]
             [reagent.dom :as rdom]
+            [dg.client.dungeon.layout :as layout]
+            [dg.shared.game-logic.dungeon.layout :as logic-layout]
             [taoensso.timbre :as timbre
              :refer-macros [log
                             trace
@@ -19,29 +21,18 @@
 
 (defonce contracts-data (atom {}))
 
+;; (def mis "SMTH IS MISSING" )
+
 (defn register-handlers! []
   ;; (deploy/register!)
   )
 
 (defn root-component []
-  (let []
+  (let [dungeon-layout logic-layout/example]
     (fn []
       [:div "DUNGEON GENIUS"
-       [:div ]])))
-
-(defn contracts-to-update [old new]
-  (reduce (fn [acc [name fd]]
-            ;; (info [:NAME name])
-            ;; (info [:FD fd])
-            ;; (info [:CMP (get-in old [name :bin :digest]) (get-in fd [:bin :digest])])
-            (if (and
-                 (get fd :bin)
-                 (not= (get-in old [name :bin :digest])
-                       (get-in fd [:bin :digest])))
-              (assoc acc name fd)
-              acc))
-          {}
-          (into [] new)))
+       [:div
+        [layout/main {:layout dungeon-layout}]]])))
 
 
 (defn init []
