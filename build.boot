@@ -92,7 +92,7 @@
 (deftask build []
   (comp (speak)
      (cljs)
-     (garden :styles-var 'dg.styles.styles/screen
+     (garden :styles-var 'dg.styles.main/main
              :output-to "public/css/styles.css")))
 
 (deftask run-sente-server

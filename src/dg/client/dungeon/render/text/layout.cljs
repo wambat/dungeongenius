@@ -1,4 +1,4 @@
-(ns dg.client.dungeon.layout
+(ns dg.client.dungeon.render.text.layout
   (:require [taoensso.timbre :as timbre
              :refer-macros [log
                             trace
@@ -8,9 +8,7 @@
                             error
                             fatal
                             report]]
-            [dg.client.dungeon.render.text.layout :as text-layout]))
+            [dg.client.dungeon.render.text.board :as board]))
 
 (defn main [params]
-  (info [:params params])
-  [text-layout/main params])
-
+  [board/main params])
