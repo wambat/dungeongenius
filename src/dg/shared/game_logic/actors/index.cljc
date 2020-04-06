@@ -1,10 +1,12 @@
 (ns dg.shared.game-logic.actors.index
   (:require [dg.shared.game-logic.actors.player :as player]
             [dg.shared.game-logic.actors.floor :as floor]
-            [dg.shared.game-logic.actors.door :as door]))
+            [dg.shared.game-logic.actors.door :as door]
+            [dg.shared.game-logic.actors.wall :as wall]))
 
 (def idx {:player player/calls
           :floor floor/calls
+          :wall wall/calls
           :door door/calls})
 
 
