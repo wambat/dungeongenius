@@ -8,9 +8,13 @@
                             error
                             fatal
                             report]]
-            [dg.client.dungeon.render.text.layout :as text-layout]))
+            [re-frame.core :as re-frame]
+            [dg.client.dungeon.render.text.layout :as text-layout]
+            [dg.client.dungeon.model.subs :as dungeon-model]))
 
-(defn main [params]
-  (info [:params params])
-  [text-layout/main params])
+(defn main []
+  (let [dungeon-layout (re-frame/subscribe [::dungeon-model/current])]
+    (fn []
+      (info [:DUNGLAYOUT @dungeon-layout])
+      [text-layout/main {:layout @dungeon-layout}])))
 

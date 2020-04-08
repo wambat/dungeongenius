@@ -2,7 +2,6 @@
   (:require [reagent.core :as reagent :refer [atom]]
             [reagent.dom :as rdom]
             [dg.client.dungeon.layout :as layout]
-            [dg.shared.game-logic.dungeon.layout :as logic-layout]
             [taoensso.timbre :as timbre
              :refer-macros [log
                             trace
@@ -15,7 +14,11 @@
             [cljs-http.client :as http]
             [cljs.tools.reader.edn :as edn]
             [cljs.core.async :refer [<!]]
-            [re-frame.core :as re-frame])
+            [re-frame.core :as re-frame]
+            [dg.client.dungeon.model.handlers :as model-h]
+            [dg.client.dungeon.input.handlers :as input-h]
+            [dg.client.io.kbd.handlers :as kbd-h]
+            )
   [:require-macros
    [cljs.core.async.macros :refer [go]]])
 
@@ -24,20 +27,22 @@
 ;; (def mis "SMTH IS MISSING" )
 
 (defn register-handlers! []
-  ;; (deploy/register!)
-  )
+  (model-h/register!)
+  (input-h/register!)
+  (kbd-h/register!))
 
 (defn root-component []
-  (let [dungeon-layout logic-layout/example]
-    (fn []
-      [:div "DUNGEON GENIUS"
-       [:div
-        [layout/main {:layout dungeon-layout}]]])))
+  [:div "DUNGEON GENIUS"
+   [:div
+    [layout/main]]])
 
+(defn init-state! []
+  (re-frame/dispatch [::model-h/new]))
 
 (defn init []
   (info "INIT")
   (register-handlers!)
+  (init-state!)
   (rdom/render [root-component]
                (.getElementById js/document "app")))
 

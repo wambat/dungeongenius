@@ -20,3 +20,9 @@
                                      :type :player})
                        (aidx/->make {:position {:x 2 :y 1}
                                      :type :door})]})
+
+(defn make-move
+  "Advances the world one turn"
+  [{:keys [world action] :as params}]
+  {:world world
+   :events []})

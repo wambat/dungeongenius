@@ -44,6 +44,6 @@
     [:div
      [:pre.text-board
       t]
-     (str (render-blk params))
+     ;; (str (render-blk params))
      ;; (str (:layout params))
      ]))
