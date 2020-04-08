@@ -7,8 +7,8 @@
 (defn upd-position [world actor fn-x fn-y]
   (info [:ORIG-ACTOR actor])
   (let [bs (get-in world [:board :size])
-        bs-x (:x bs)
-        bs-y (:y bs)
+        bs-x (- (:x bs) 1)
+        bs-y (- (:y bs) 1)
         upd-actor (-> actor
                       (update-in [:position :x] #(max 0 (min bs-x (fn-x %))))
                       (update-in [:position :y] #(max 0 (min bs-y (fn-y %)))))
