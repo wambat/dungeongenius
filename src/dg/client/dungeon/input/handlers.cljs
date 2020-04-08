@@ -4,10 +4,10 @@
             [taoensso.timbre :refer-macros [log trace debug info warn error]]
             [clojure.string :as cstr]))
 
-(def mapping {["KeyA" nil] [:cursor/move :left]
-              ["KeyD" nil] [:cursor/move :right]
-              ["KeyW" nil] [:cursor/move :up]
-              ["KeyS" nil] [:cursor/move :down]
+(def mapping {["KeyA" nil] [:player/move :left]
+              ["KeyD" nil] [:player/move :right]
+              ["KeyW" nil] [:player/move :up]
+              ["KeyS" nil] [:player/move :down]
               ["Space" nil] (fn [state]
                               [:placement/add (:cursor state)])
 

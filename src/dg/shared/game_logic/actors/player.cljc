@@ -1,4 +1,6 @@
-(ns dg.shared.game-logic.actors.player)
+(ns dg.shared.game-logic.actors.player
+  (:require [dg.shared.game-logic.traits.movable :as t-movable]
+            [dg.shared.game-logic.traits.controllable :as t-controllable]))
 
 
 (def default
@@ -10,11 +12,11 @@
 (defn ->make [params]
   (merge
    default
+   {:id #?(:cljs (random-uuid)
+           :clj (java.util.UUID/randomUUID))}
    params))
 
-(defn control [params]
-  {:events []
-   :actors (get-in params [:layout :actors])})
-
 (def calls {:make ->make
-            :control control})
+            :traits (merge
+                     (t-movable/->make {:speed 1})
+                     (t-controllable/->make {}))})
